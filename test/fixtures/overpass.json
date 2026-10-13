@@ -1,0 +1,40 @@
+{
+    "elements": [
+        {
+            "type": "way", "id": 1, "nodes": [10, 11, 12],
+            "geometry": [{ "lat": 20.67, "lon": -103.35 }, { "lat": 20.67, "lon": -103.349 }, { "lat": 20.67, "lon": -103.348 }],
+            "tags": { "highway": "residential", "name": "Calle Hidalgo" }
+        },
+        {
+            "type": "way", "id": 2, "nodes": [13, 11, 14],
+            "geometry": [{ "lat": 20.669, "lon": -103.349 }, { "lat": 20.67, "lon": -103.349 }, { "lat": 20.671, "lon": -103.349 }],
+            "tags": { "highway": "primary", "name": "Av. Juárez" }
+        },
+        {
+            "type": "way", "id": 3, "nodes": [20, 21],
+            "geometry": [{ "lat": 20.672, "lon": -103.35 }, { "lat": 20.672, "lon": -103.349 }],
+            "tags": { "highway": "construction" }
+        },
+        {
+            "type": "way", "id": 4, "nodes": [30, 31, 32, 33, 30],
+            "geometry": [
+                { "lat": 20.668, "lon": -103.35 }, { "lat": 20.668, "lon": -103.3495 },
+                { "lat": 20.6685, "lon": -103.3495 }, { "lat": 20.6685, "lon": -103.35 }, { "lat": 20.668, "lon": -103.35 }
+            ],
+            "tags": { "leisure": "park" }
+        },
+        {
+            "type": "way", "id": 5, "nodes": [40, 41],
+            "geometry": [{ "lat": 20.666, "lon": -103.35 }, { "lat": 20.666, "lon": -103.348 }],
+            "tags": { "waterway": "river" }
+        },
+        {
+            "type": "relation", "id": 6,
+            "tags": { "type": "multipolygon", "natural": "water" },
+            "members": [
+                { "type": "way", "ref": 50, "role": "outer", "geometry": [{ "lat": 20.66, "lon": -103.35 }, { "lat": 20.66, "lon": -103.349 }, { "lat": 20.661, "lon": -103.349 }] },
+                { "type": "way", "ref": 51, "role": "outer", "geometry": [{ "lat": 20.66, "lon": -103.35 }, { "lat": 20.661, "lon": -103.35 }, { "lat": 20.661, "lon": -103.349 }] }
+            ]
+        }
+    ]
+}

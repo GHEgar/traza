@@ -1,0 +1,77 @@
+{
+    "name": "traza",
+    "version": "0.1.0",
+    "description": "Headless street infographics: city posters, street orientation roses, network statistics and street-name maps from OpenStreetMap or your own data.",
+    "license": "AGPL-3.0-only",
+    "author": "Edgar Villarreal",
+    "type": "module",
+    "sideEffects": false,
+    "files": [
+        "dist"
+    ],
+    "exports": {
+        ".": {
+            "types": "./dist/core/index.d.ts",
+            "import": "./dist/core/index.js"
+        },
+        "./osm": {
+            "types": "./dist/osm/index.d.ts",
+            "import": "./dist/osm/index.js"
+        },
+        "./sources": {
+            "types": "./dist/sources/index.d.ts",
+            "import": "./dist/sources/index.js"
+        },
+        "./orientation": {
+            "types": "./dist/orientation/index.d.ts",
+            "import": "./dist/orientation/index.js"
+        },
+        "./stats": {
+            "types": "./dist/stats/index.d.ts",
+            "import": "./dist/stats/index.js"
+        },
+        "./names": {
+            "types": "./dist/names/index.d.ts",
+            "import": "./dist/names/index.js"
+        },
+        "./poster": {
+            "types": "./dist/poster/index.d.ts",
+            "import": "./dist/poster/index.js"
+        },
+        "./svg": {
+            "types": "./dist/svg/index.d.ts",
+            "import": "./dist/svg/index.js"
+        },
+        "./ol": {
+            "types": "./dist/ol/index.d.ts",
+            "import": "./dist/ol/index.js"
+        }
+    },
+    "scripts": {
+        "build": "rm -rf dist && tsc -p tsconfig.build.json",
+        "typecheck": "tsc -p tsconfig.json --noEmit",
+        "lint": "eslint .",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "demo": "vite --config demo/vite.config.ts",
+        "demo:build": "vite build --config demo/vite.config.ts"
+    },
+    "peerDependencies": {
+        "ol": ">=10"
+    },
+    "peerDependenciesMeta": {
+        "ol": {
+            "optional": true
+        }
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "eslint": "^10.12.0",
+        "happy-dom": "^20.14.5",
+        "ol": "^10.11.0",
+        "typescript": "~6.0.3",
+        "typescript-eslint": "^8.71.1",
+        "vite": "^8.3.4",
+        "vitest": "^5.0.3"
+    }
+}

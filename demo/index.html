@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>traza · demo</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+        <h1>traza</h1>
+        <p>Infografías de calles desde OpenStreetMap: póster, orientación, estadísticas y nombres.</p>
+    </header>
+    <form id="controls">
+        <label>Lugar <select name="place"></select></label>
+        <label>Radio (m) <input name="radius" type="number" min="200" max="2500" step="100"></label>
+        <label>Forma
+            <select name="shape"><option value="circle">Círculo</option><option value="rect">Rectángulo</option></select>
+        </label>
+        <label>Tema <select name="theme"></select></label>
+        <label>Colorear
+            <select name="color"><option value="class">Por jerarquía</option><option value="names">Por nombre</option></select>
+        </label>
+        <fieldset>
+            <label><input type="checkbox" name="water" checked> Agua</label>
+            <label><input type="checkbox" name="parks" checked> Parques</label>
+            <label><input type="checkbox" name="buildings"> Edificios</label>
+        </fieldset>
+        <button type="submit">Cargar</button>
+        <output id="status"></output>
+    </form>
+    <main>
+        <section class="poster">
+            <div id="poster" class="frame"></div>
+            <div class="actions">
+                <button type="button" id="export-svg" disabled>Descargar SVG</button>
+                <button type="button" id="export-png" disabled>Descargar PNG</button>
+            </div>
+        </section>
+        <section class="side">
+            <article>
+                <h2>Orientación</h2>
+                <div id="rose" class="frame"></div>
+                <p id="order"></p>
+            </article>
+            <article>
+                <h2>Red</h2>
+                <dl id="stats"></dl>
+            </article>
+            <article>
+                <h2>Nombres</h2>
+                <ul id="categories" class="legend"></ul>
+                <ol id="names"></ol>
+            </article>
+        </section>
+    </main>
+    <script type="module" src="./main.ts"></script>
+</body>
+</html>
