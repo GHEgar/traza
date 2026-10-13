@@ -6,6 +6,7 @@ const km = new Intl.NumberFormat('es-MX', { maximumFractionDigits: 1 });
 const int = new Intl.NumberFormat('es-MX', { maximumFractionDigits: 0 });
 const pct = new Intl.NumberFormat('es-MX', { style: 'percent', maximumFractionDigits: 0 });
 const dec = new Intl.NumberFormat('es-MX', { maximumFractionDigits: 3 });
+const nameCount = (count: number): string => `${int.format(count)} ${count === 1 ? 'nombre' : 'nombres'}`;
 
 const element = <K extends keyof HTMLElementTagNameMap>(tag: K, text: string): HTMLElementTagNameMap[K] => {
     const node = document.createElement(tag);
@@ -25,7 +26,7 @@ export const renderStats = (target: HTMLElement, stats: NetworkStats, types: Typ
         ['Densidad', `${km.format(stats.density)} km/km²`],
         ['Intersecciones/km²', int.format(stats.intersectionDensity)],
         ['Con nombre', pct.format(stats.namedShare)],
-        ...types.slice(0, 4).map((type): [string, string] => [type.type ?? 'Sin tipo', `${km.format(type.length / 1000)} km · ${type.names} nombres`]),
+        ...types.slice(0, 4).map((type): [string, string] => [type.type ?? 'Sin tipo', `${km.format(type.length / 1000)} km · ${nameCount(type.names)}`]),
     ];
     target.replaceChildren(...rows.flatMap(([label, value]) => [element('dt', label), element('dd', value)]));
 };
@@ -39,7 +40,7 @@ export const renderNames = (
 ): void => {
     const named = categories.categories.reduce((sum, entry) => sum + entry.length, categories.uncategorized);
     legend.replaceChildren(...categories.categories.map((entry) => {
-        const item = element('li', `${CATEGORY_LABELS[entry.id] ?? entry.id} · ${pct.format(named > 0 ? entry.length / named : 0)} · ${entry.names} nombres`);
+        const item = element('li', `${CATEGORY_LABELS[entry.id] ?? entry.id} · ${pct.format(named > 0 ? entry.length / named : 0)} · ${nameCount(entry.names)}`);
         item.style.setProperty('--swatch', colors[entry.id] ?? 'transparent');
         return item;
     }));

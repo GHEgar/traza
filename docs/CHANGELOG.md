@@ -5,6 +5,15 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [No publicado]
 
+### Cambiado
+
+- Demo: selector de servidor Overpass; cambiar tema, forma o color redibuja la ciudad cargada sin
+  volver a consultar, y si una consulta falla lo dice sin borrar lo que se muestra.
+
+### Corregido
+
+- Demo: contraste de la rosa en el tema Noche, plural de «nombre» y favicon.
+
 ## [0.1.0] - 2026-10-13
 
 ### Agregado

@@ -8,6 +8,7 @@ import { createPosterScene } from 'traza/poster';
 import { posterToSvg, roseToSvg } from 'traza/svg';
 import type { PosterTheme } from 'traza/svg';
 import { PLACES } from './places.js';
+import type { Place } from './places.js';
 import { RULES } from './rules.js';
 import { THEMES } from './themes.js';
 import { renderNames, renderStats } from './panels.js';
@@ -46,56 +47,73 @@ const load = async (): Promise<{ network: StreetNetwork; extras: Extras }> => {
     }
     controller?.abort();
     controller = new AbortController();
-    const data = await loadOsm({ bbox: bboxAround(chosen.center, Number(radius.value) * 1.05) }, { ...layers, signal: controller.signal });
+    const data = await loadOsm({ bbox: bboxAround(chosen.center, Number(radius.value) * 1.05) }, { ...layers, signal: controller.signal, endpoint: field<HTMLSelectElement>('endpoint').value });
     cache.set(key, data);
     return data;
 };
 
+interface Shown {
+    place: Place;
+    radius: number;
+    network: StreetNetwork;
+    extras: Extras;
+}
+
+let shown: Shown | null = null;
+
+const draw = ({ place: chosen, radius: size, network: streets, extras }: Shown): void => {
+    const look = THEMES[theme.value];
+    if (!look) {
+        return;
+    }
+    const categories = categorizeNetwork(streets, RULES);
+    const byNames = field<HTMLSelectElement>('color').value === 'names';
+    const scene = createPosterScene({
+        network: streets,
+        extras,
+        center: chosen.center,
+        radius: size,
+        shape: field<HTMLSelectElement>('shape').value === 'rect' ? 'rect' : 'circle',
+        title: chosen.title,
+        subtitle: chosen.subtitle,
+        ...(byNames ? { edgeKey: (edge) => categories.byEdge.get(edge.id) ?? 'other' } : {}),
+    });
+    const posterTheme: PosterTheme = byNames
+        ? {
+            ...look.poster,
+            layers: {
+                ...look.poster.layers,
+                other: { stroke: look.other, width: 0.6 },
+                ...Object.fromEntries(Object.entries(look.categories).map(([id, color]) => [id, { stroke: color, width: 1.4 }])),
+            },
+        }
+        : look.poster;
+    const svg = posterToSvg(scene, posterTheme);
+    $('#poster').innerHTML = svg;
+    current = { svg, name: chosen.title.toLowerCase().replace(/\s+/g, '-') };
+    const rose = orientation(streets, { classes: ROADS });
+    $('#rose').innerHTML = roseToSvg(rose, look.rose, { size: 220, labels: ['N', 'E', 'S', 'O'] });
+    $('#order').textContent = `Orden φ = ${rose.order.toFixed(3)} · entropía ${rose.entropy.toFixed(3)}`;
+    renderStats($('#stats'), networkStats(streets, { area: Math.PI * size ** 2 }), streetTypes(streets, { classes: ROADS }));
+    renderNames($('#categories'), $('#names'), categories, topStreetNames(streets, { limit: 8, classes: ROADS }), look.categories);
+    $<HTMLButtonElement>('#export-svg').disabled = false;
+    $<HTMLButtonElement>('#export-png').disabled = false;
+    status.value = `${chosen.label} · ${streets.edges.length} tramos`;
+};
+
 const render = async (): Promise<void> => {
     const chosen = PLACES[Number(place.value)];
-    const look = THEMES[theme.value];
-    if (!chosen || !look) {
+    if (!chosen) {
         return;
     }
     status.value = 'Consultando Overpass…';
     try {
-        const { network: streets, extras } = await load();
-        const categories = categorizeNetwork(streets, RULES);
-        const byNames = field<HTMLSelectElement>('color').value === 'names';
-        const scene = createPosterScene({
-            network: streets,
-            extras,
-            center: chosen.center,
-            radius: Number(radius.value),
-            shape: field<HTMLSelectElement>('shape').value === 'rect' ? 'rect' : 'circle',
-            title: chosen.title,
-            subtitle: chosen.subtitle,
-            ...(byNames ? { edgeKey: (edge) => categories.byEdge.get(edge.id) ?? 'other' } : {}),
-        });
-        const posterTheme: PosterTheme = byNames
-            ? {
-                ...look.poster,
-                layers: {
-                    ...look.poster.layers,
-                    other: { stroke: look.other, width: 0.6 },
-                    ...Object.fromEntries(Object.entries(look.categories).map(([id, color]) => [id, { stroke: color, width: 1.4 }])),
-                },
-            }
-            : look.poster;
-        const svg = posterToSvg(scene, posterTheme);
-        $('#poster').innerHTML = svg;
-        current = { svg, name: chosen.title.toLowerCase().replace(/\s+/g, '-') };
-        const rose = orientation(streets, { classes: ROADS });
-        $('#rose').innerHTML = roseToSvg(rose, look.rose, { size: 220, labels: ['N', 'E', 'S', 'O'] });
-        $('#order').textContent = `Orden φ = ${rose.order.toFixed(3)} · entropía ${rose.entropy.toFixed(3)}`;
-        renderStats($('#stats'), networkStats(streets, { area: Math.PI * Number(radius.value) ** 2 }), streetTypes(streets, { classes: ROADS }));
-        renderNames($('#categories'), $('#names'), categories, topStreetNames(streets, { limit: 8, classes: ROADS }), look.categories);
-        $<HTMLButtonElement>('#export-svg').disabled = false;
-        $<HTMLButtonElement>('#export-png').disabled = false;
-        status.value = `${streets.edges.length} tramos`;
+        const { network, extras } = await load();
+        shown = { place: chosen, radius: Number(radius.value), network, extras };
+        draw(shown);
     } catch (error) {
         if ((error as Error).name !== 'AbortError') {
-            status.value = (error as Error).message;
+            status.value = `${(error as Error).message}${shown ? ` · se muestra ${shown.place.label}` : ''}`;
         }
     }
 };
@@ -134,7 +152,7 @@ form.addEventListener('submit', (event) => {
 });
 form.addEventListener('change', (event) => {
     const target = event.target as HTMLInputElement;
-    if (['theme', 'shape', 'color'].includes(target.name) && current) {
-        void render();
+    if (['theme', 'shape', 'color'].includes(target.name) && shown) {
+        draw(shown);
     }
 });

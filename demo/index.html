@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>traza · demo</title>
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -26,6 +27,13 @@
             <label><input type="checkbox" name="parks" checked> Parques</label>
             <label><input type="checkbox" name="buildings"> Edificios</label>
         </fieldset>
+        <label>Servidor
+            <select name="endpoint">
+                <option value="https://overpass-api.de/api/interpreter">overpass-api.de</option>
+                <option value="https://overpass.private.coffee/api/interpreter">private.coffee</option>
+                <option value="https://maps.mail.ru/osm/tools/overpass/api/interpreter">VK Maps</option>
+            </select>
+        </label>
         <button type="submit">Cargar</button>
         <output id="status"></output>
     </form>

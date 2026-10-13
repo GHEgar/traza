@@ -59,7 +59,7 @@ export const THEMES: Record<string, DemoTheme> = {
             },
             text: text('#f2e9d8', 'Helvetica, Arial, sans-serif'),
         },
-        rose: { fill: '#f2c14e', grid: { stroke: '#2a3348', width: 0.5 }, labels: { fill: '#f2e9d8', fontSize: 10 } },
+        rose: { fill: '#f2c14e', background: '#0f1420', grid: { stroke: '#2a3348', width: 0.5 }, labels: { fill: '#f2e9d8', fontSize: 10 } },
         categories: { women: '#ff6b9a', saints: '#5fa8ff', dates: '#f2c14e', heroes: '#5ee6a8', nature: '#a3e35b' },
         other: '#3a4358',
     },
