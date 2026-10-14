@@ -2,6 +2,17 @@
     "name": "traza",
     "version": "0.1.0",
     "description": "Headless street infographics: city posters, orientation roses, network stats and street-name maps.",
+    "keywords": [
+        "openstreetmap",
+        "overpass",
+        "streets",
+        "street-network",
+        "infographic",
+        "poster",
+        "orientation",
+        "headless",
+        "geojson"
+    ],
     "license": "AGPL-3.0-only",
     "author": "Edgar Villarreal",
     "type": "module",
