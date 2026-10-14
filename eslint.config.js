@@ -1,5 +1,5 @@
-import base from '@ghegar/eslint-config';
-import ts from '@ghegar/eslint-config/ts';
+import base from '@npmegar/eslint-config';
+import ts from '@npmegar/eslint-config/ts';
 
 export default [
     { ignores: ['demo-dist/'] },
