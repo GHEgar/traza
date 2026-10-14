@@ -8,6 +8,8 @@ Headless street infographics: city posters, orientation roses, network stats and
 
 ![Street posters and orientation roses of Guadalajara, Mexico City, Barcelona, Paris and Rome](.github/assets/demo.gif)
 
+**[Live demo](https://ghegar.github.io/traza/)**
+
 traza takes a street network — from OpenStreetMap or from your own GeoJSON/WFS layer — and gives you
 the data for four pieces: a city poster, a street orientation rose, network statistics and
 street-name maps. It owns the network model, the local projection, the poster scene and the numbers;
