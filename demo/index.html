@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,53 +10,53 @@
 <body>
     <header>
         <h1>traza</h1>
-        <p>Infografías de calles desde OpenStreetMap: póster, orientación, estadísticas y nombres.</p>
+        <p>Street infographics from OpenStreetMap: poster, orientation, stats and names.</p>
     </header>
     <form id="controls">
-        <label>Lugar <select name="place"></select></label>
-        <label>Radio (m) <input name="radius" type="number" min="200" max="2500" step="100"></label>
-        <label>Forma
-            <select name="shape"><option value="circle">Círculo</option><option value="rect">Rectángulo</option></select>
+        <label>Place <select name="place"></select></label>
+        <label>Radius (m) <input name="radius" type="number" min="200" max="2500" step="100"></label>
+        <label>Shape
+            <select name="shape"><option value="circle">Circle</option><option value="rect">Rectangle</option></select>
         </label>
-        <label>Tema <select name="theme"></select></label>
-        <label>Colorear
-            <select name="color"><option value="class">Por jerarquía</option><option value="names">Por nombre</option></select>
+        <label>Theme <select name="theme"></select></label>
+        <label>Color
+            <select name="color"><option value="class">By road class</option><option value="names">By name</option></select>
         </label>
         <fieldset>
-            <label><input type="checkbox" name="water" checked> Agua</label>
-            <label><input type="checkbox" name="parks" checked> Parques</label>
-            <label><input type="checkbox" name="buildings"> Edificios</label>
+            <label><input type="checkbox" name="water" checked> Water</label>
+            <label><input type="checkbox" name="parks" checked> Parks</label>
+            <label><input type="checkbox" name="buildings"> Buildings</label>
         </fieldset>
-        <label>Servidor
+        <label>Server
             <select name="endpoint">
                 <option value="https://overpass-api.de/api/interpreter">overpass-api.de</option>
                 <option value="https://overpass.private.coffee/api/interpreter">private.coffee</option>
                 <option value="https://maps.mail.ru/osm/tools/overpass/api/interpreter">VK Maps</option>
             </select>
         </label>
-        <button type="submit">Cargar</button>
+        <button type="submit">Load</button>
         <output id="status"></output>
     </form>
     <main>
         <section class="poster">
             <div id="poster" class="frame"></div>
             <div class="actions">
-                <button type="button" id="export-svg" disabled>Descargar SVG</button>
-                <button type="button" id="export-png" disabled>Descargar PNG</button>
+                <button type="button" id="export-svg" disabled>Download SVG</button>
+                <button type="button" id="export-png" disabled>Download PNG</button>
             </div>
         </section>
         <section class="side">
             <article>
-                <h2>Orientación</h2>
+                <h2>Orientation</h2>
                 <div id="rose" class="frame"></div>
                 <p id="order"></p>
             </article>
             <article>
-                <h2>Red</h2>
+                <h2>Network</h2>
                 <dl id="stats"></dl>
             </article>
             <article>
-                <h2>Nombres</h2>
+                <h2>Names</h2>
                 <ul id="categories" class="legend"></ul>
                 <ol id="names"></ol>
             </article>

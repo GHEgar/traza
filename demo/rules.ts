@@ -24,9 +24,9 @@ export const RULES: NameRule[] = [
 ];
 
 export const CATEGORY_LABELS: Record<string, string> = {
-    women: 'Mujeres',
-    saints: 'Santos y vírgenes',
-    dates: 'Fechas',
-    heroes: 'Próceres y gestas',
-    nature: 'Naturaleza',
+    women: 'Women',
+    saints: 'Saints and virgins',
+    dates: 'Dates',
+    heroes: 'Heroes and history',
+    nature: 'Nature',
 };

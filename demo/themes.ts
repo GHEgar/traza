@@ -25,8 +25,8 @@ const text = (fill: string, family: string) => ({
 });
 
 export const THEMES: Record<string, DemoTheme> = {
-    papel: {
-        label: 'Papel',
+    paper: {
+        label: 'Paper',
         poster: {
             background: '#f3ede2',
             layers: {
@@ -43,8 +43,8 @@ export const THEMES: Record<string, DemoTheme> = {
         categories: { women: '#b8336a', saints: '#3a6ea5', dates: '#e09f3e', heroes: '#2d6a4f', nature: '#6a994e' },
         other: '#cfc6b8',
     },
-    noche: {
-        label: 'Noche',
+    night: {
+        label: 'Night',
         poster: {
             background: '#0f1420',
             mapBackground: '#141b2b',
@@ -63,8 +63,8 @@ export const THEMES: Record<string, DemoTheme> = {
         categories: { women: '#ff6b9a', saints: '#5fa8ff', dates: '#f2c14e', heroes: '#5ee6a8', nature: '#a3e35b' },
         other: '#3a4358',
     },
-    plano: {
-        label: 'Plano azul',
+    blueprint: {
+        label: 'Blueprint',
         poster: {
             background: '#1d4e89',
             layers: { ...roads('#eaf2ff', 0.9), water: { fill: '#163d6d' }, park: { fill: '#22558f' }, building: { fill: '#2a5d97' } },

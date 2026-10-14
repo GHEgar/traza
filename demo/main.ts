@@ -37,7 +37,7 @@ const checked = (name: string): boolean => field<HTMLInputElement>(name).checked
 const load = async (): Promise<{ network: StreetNetwork; extras: Extras }> => {
     const chosen = PLACES[Number(place.value)] ?? PLACES[0];
     if (!chosen) {
-        throw new Error('Sin lugares');
+        throw new Error('No places');
     }
     const layers = { water: checked('water'), parks: checked('parks'), buildings: checked('buildings') };
     const key = JSON.stringify([place.value, radius.value, layers]);
@@ -92,13 +92,13 @@ const draw = ({ place: chosen, radius: size, network: streets, extras }: Shown):
     $('#poster').innerHTML = svg;
     current = { svg, name: chosen.title.toLowerCase().replace(/\s+/g, '-') };
     const rose = orientation(streets, { classes: ROADS });
-    $('#rose').innerHTML = roseToSvg(rose, look.rose, { size: 220, labels: ['N', 'E', 'S', 'O'] });
-    $('#order').textContent = `Orden φ = ${rose.order.toFixed(3)} · entropía ${rose.entropy.toFixed(3)}`;
+    $('#rose').innerHTML = roseToSvg(rose, look.rose, { size: 220, labels: ['N', 'E', 'S', 'W'] });
+    $('#order').textContent = `Order φ = ${rose.order.toFixed(3)} · entropy ${rose.entropy.toFixed(3)}`;
     renderStats($('#stats'), networkStats(streets, { area: Math.PI * size ** 2 }), streetTypes(streets, { classes: ROADS }));
     renderNames($('#categories'), $('#names'), categories, topStreetNames(streets, { limit: 8, classes: ROADS }), look.categories);
     $<HTMLButtonElement>('#export-svg').disabled = false;
     $<HTMLButtonElement>('#export-png').disabled = false;
-    status.value = `${chosen.label} · ${streets.edges.length} tramos`;
+    status.value = `${chosen.label} · ${streets.edges.length} segments`;
 };
 
 const render = async (): Promise<void> => {
@@ -106,14 +106,14 @@ const render = async (): Promise<void> => {
     if (!chosen) {
         return;
     }
-    status.value = 'Consultando Overpass…';
+    status.value = 'Querying Overpass…';
     try {
         const { network, extras } = await load();
         shown = { place: chosen, radius: Number(radius.value), network, extras };
         draw(shown);
     } catch (error) {
         if ((error as Error).name !== 'AbortError') {
-            status.value = `${(error as Error).message}${shown ? ` · se muestra ${shown.place.label}` : ''}`;
+            status.value = `${(error as Error).message}${shown ? ` · showing ${shown.place.label}` : ''}`;
         }
     }
 };

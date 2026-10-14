@@ -7,6 +7,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ### Cambiado
 
+- El demo está en inglés.
 - Demo: selector de servidor Overpass; cambiar tema, forma o color redibuja la ciudad cargada sin
   volver a consultar, y si una consulta falla lo dice sin borrar lo que se muestra.
 - El lint usa `@ghegar/eslint-config` (presets `base` y `ts`) en lugar de una config propia.
