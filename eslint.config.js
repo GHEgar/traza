@@ -1,17 +1,8 @@
-import js from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import base from '@ghegar/eslint-config';
+import ts from '@ghegar/eslint-config/ts';
 
-export default tseslint.config(
-    { ignores: ['dist', 'demo-dist', 'node_modules', 'test-results'] },
-    js.configs.recommended,
-    ...tseslint.configs.strict,
-    {
-        files: ['**/*.ts'],
-        rules: {
-            indent: ['error', 4, { SwitchCase: 1 }],
-            quotes: ['error', 'single', { avoidEscape: true }],
-            semi: ['error', 'always'],
-            'max-lines': ['error', { max: 300, skipBlankLines: true }],
-        },
-    },
-);
+export default [
+    { ignores: ['demo-dist/', 'test-results/'] },
+    ...base,
+    ...ts,
+];
