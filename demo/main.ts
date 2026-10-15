@@ -1,4 +1,5 @@
 import '@npmegar/rotulo';
+import fontUrl from '@npmegar/rotulo/fonts/Rotulo-Variable.woff2?url';
 import { bboxAround } from 'traza';
 import type { Extras, RoadClass, StreetNetwork } from 'traza';
 import { loadOsm } from 'traza/osm';
@@ -132,11 +133,32 @@ $('#export-svg').addEventListener('click', () => {
     }
 });
 
-$('#export-png').addEventListener('click', () => {
+let fontFace: Promise<string> | null = null;
+
+const embeddedFont = (): Promise<string> => {
+    fontFace ??= fetch(fontUrl)
+        .then((response) => response.blob())
+        .then((blob) => new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(String(reader.result).replace(/^data:[^,]*,/, ''));
+            reader.onerror = () => reject(reader.error);
+            reader.readAsDataURL(blob);
+        }))
+        .then((base64) => `<style>@font-face{font-family:Rotulo;src:url(data:font/woff2;base64,${base64}) format('woff2');font-weight:200 700}</style>`)
+        .catch(() => {
+            fontFace = null;
+            return '';
+        });
+    return fontFace;
+};
+
+$('#export-png').addEventListener('click', async () => {
     if (!current) {
         return;
     }
-    const { svg, name } = current;
+    const { svg: markup, name } = current;
+    const style = await embeddedFont();
+    const svg = markup.replace(/<svg[^>]*>/, (open) => open + style);
     const image = new Image();
     image.onload = () => {
         const scale = 8;
