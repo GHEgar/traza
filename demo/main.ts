@@ -1,5 +1,5 @@
-import '@npmegar/rotulo';
-import fontUrl from '@npmegar/rotulo/fonts/Rotulo-Variable.woff2?url';
+import 'rotulo';
+import fontUrl from 'rotulo/fonts/Rotulo-Variable.woff2?url';
 import { bboxAround } from 'traza';
 import type { Extras, RoadClass, StreetNetwork } from 'traza';
 import { loadOsm } from 'traza/osm';
