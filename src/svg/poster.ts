@@ -77,7 +77,7 @@ export const posterToSvg = (scene: PosterScene, theme: PosterTheme, options: Svg
     for (const text of scene.texts) {
         const style = text.role === 'attribution' ? attributionStyle(scene, theme) : theme.text[text.role];
         if (style) {
-            parts.push(textElement(text.text, text.x, text.y, text.anchor, style));
+            parts.push(textElement(text.text, text.x, text.y, text.anchor, style, text.maxWidth));
         }
     }
     parts.push('</svg>');

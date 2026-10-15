@@ -67,6 +67,19 @@ describe('posterToSvg', () => {
         expect(svg).not.toContain('N · ');
     });
 
+    it('fits long titles to the sheet width and leaves short ones alone', () => {
+        const title = { fill: '#222', fontSize: 22, fontWeight: 700, letterSpacing: 6, uppercase: true };
+        const long = createPosterScene({ network: grid(2), title: 'Ciudad de México' });
+        expect(long.texts.find((text) => text.role === 'title')?.maxWidth).toBe(252);
+        const svg = posterToSvg(long, { ...theme, text: { title } });
+        expect(svg).toContain('textLength="252" lengthAdjust="spacingAndGlyphs">CIUDAD DE MÉXICO</text>');
+        const short = posterToSvg(createPosterScene({ network: grid(2), title: 'Roma' }), { ...theme, text: { title } });
+        expect(short).toContain('>ROMA</text>');
+        expect(short).not.toContain('textLength');
+        const tuned = posterToSvg(createPosterScene({ network: grid(2), title: 'Guadalajara' }), { ...theme, text: { title: { ...title, advance: 1 } } });
+        expect(tuned).toContain('lengthAdjust="spacingAndGlyphs">GUADALAJARA</text>');
+    });
+
     it('draws the attribution even without a theme style for it', () => {
         const svg = posterToSvg(createPosterScene({ network: grid(2) }), { background: '#fff', layers: {}, text: {} });
         expect(svg).toContain('© OpenStreetMap contributors');

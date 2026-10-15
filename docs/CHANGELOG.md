@@ -15,6 +15,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ### Corregido
 
 - Demo: contraste de la rosa en el tema Noche, plural de «nombre» y favicon.
+- Los títulos largos se salían del póster: título, subtítulo y coordenadas llevan `maxWidth` y, si
+  la estimación desborda, `posterToSvg` los ajusta con `textLength`; `advance` afina la estimación.
 
 ## [0.1.0] - 2026-10-13
 

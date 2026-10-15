@@ -115,6 +115,11 @@ const svg = posterToSvg(scene, {
 | `title`, `subtitle`, `coordinates` | none, none, formatted center | Title block; `coordinates: false` hides them |
 | `attribution` | none | Appended to the OSM attribution, never a replacement |
 
+Title, subtitle and coordinates carry a `maxWidth` (the width inside the margins). `posterToSvg`
+estimates their width from `fontSize`, `letterSpacing` and `advance` (average glyph width in em:
+`0.75` for all-caps text, `0.6` otherwise) and, when it would overflow, sets `textLength` with
+`lengthAdjust="spacingAndGlyphs"` so the text fits with any font. Raise `advance` for a wide font.
+
 Layer ids are the road classes, `water`, `waterway`, `park`, `building` and whatever `edgeKey`
 returns. A layer without a style in `layers` uses `defaultLayer`, or is not drawn.
 

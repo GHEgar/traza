@@ -30,6 +30,7 @@ export interface SceneText {
     x: number;
     y: number;
     anchor: 'start' | 'middle' | 'end';
+    maxWidth?: number;
 }
 
 export interface PosterScene {
@@ -143,17 +144,18 @@ export const createPosterScene = (options: PosterOptions): PosterScene => {
         ? [OSM_ATTRIBUTION, options.attribution].filter(Boolean).join(' · ')
         : options.attribution ?? null;
     const middle = width / 2;
+    const maxWidth = width - 2 * margin;
     const textTop = height - margin - textHeight;
     const texts: SceneText[] = [];
     if (options.title) {
-        texts.push({ role: 'title', text: options.title, x: middle, y: textTop + textHeight * 0.45, anchor: 'middle' });
+        texts.push({ role: 'title', text: options.title, x: middle, y: textTop + textHeight * 0.45, anchor: 'middle', maxWidth });
     }
     if (options.subtitle) {
-        texts.push({ role: 'subtitle', text: options.subtitle, x: middle, y: textTop + textHeight * 0.68, anchor: 'middle' });
+        texts.push({ role: 'subtitle', text: options.subtitle, x: middle, y: textTop + textHeight * 0.68, anchor: 'middle', maxWidth });
     }
     if (options.coordinates !== false) {
         const text = typeof options.coordinates === 'string' ? options.coordinates : formatCoordinates(center, options.coordinates);
-        texts.push({ role: 'coordinates', text, x: middle, y: textTop + textHeight * 0.88, anchor: 'middle' });
+        texts.push({ role: 'coordinates', text, x: middle, y: textTop + textHeight * 0.88, anchor: 'middle', maxWidth });
     }
     if (attribution) {
         texts.push({ role: 'attribution', text: attribution, x: width - margin, y: height - margin * 0.4, anchor: 'end' });
