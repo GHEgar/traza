@@ -57,7 +57,7 @@ export const THEMES: Record<string, DemoTheme> = {
                 park: { fill: '#1d2d25' },
                 building: { fill: '#1b2232' },
             },
-            text: text('#f2e9d8', 'Helvetica, Arial, sans-serif'),
+            text: text('#f2e9d8', 'Rotulo, system-ui, sans-serif'),
         },
         rose: { fill: '#f2c14e', background: '#0f1420', grid: { stroke: '#2a3348', width: 0.5 }, labels: { fill: '#f2e9d8', fontSize: 10 } },
         categories: { women: '#ff6b9a', saints: '#5fa8ff', dates: '#f2c14e', heroes: '#5ee6a8', nature: '#a3e35b' },

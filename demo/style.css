@@ -6,7 +6,7 @@
     --line: #e2ddd3;
     --card: #ffffff;
     --accent: #b8336a;
-    font-family: system-ui, sans-serif;
+    font-family: 'Rotulo', system-ui, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

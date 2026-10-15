@@ -1,3 +1,4 @@
+import '@npmegar/rotulo';
 import { bboxAround } from 'traza';
 import type { Extras, RoadClass, StreetNetwork } from 'traza';
 import { loadOsm } from 'traza/osm';
