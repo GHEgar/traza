@@ -1,6 +1,6 @@
 {
     "name": "traza",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Headless street infographics: city posters, orientation roses, network stats and street-name maps.",
     "keywords": [
         "openstreetmap",
