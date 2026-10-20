@@ -5,10 +5,20 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [No publicado]
 
+## [0.3.0] - 2026-10-20
+
 ### Agregado
 
+- `networkStats` devuelve los campos con la unidad en el nombre: `lengthDensityKmPerKm2` (longitud de
+  calles por área, en km/km²), `intersectionsPerKm2` y `areaKm2`. `density` e `intersectionDensity`
+  siguen con los mismos valores.
 - `release.yml`: un tag `vX.Y.Z` corre las pruebas, crea el release con su sección del CHANGELOG y
   publica en npm con procedencia y en GitHub Packages.
+
+### Corregido
+
+- El README decía que las densidades eran «por km²»: la de longitud sale en km/km² y la de
+  intersecciones en intersecciones por km². El demo muestra los campos nuevos.
 
 ## [0.2.0] - 2026-10-15
 

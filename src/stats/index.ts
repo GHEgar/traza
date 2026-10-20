@@ -16,8 +16,11 @@ export interface NetworkStats {
     meanEdgeLength: number;
     circuity: number;
     area: number;
+    areaKm2: number;
     density: number;
+    lengthDensityKmPerKm2: number;
     intersectionDensity: number;
+    intersectionsPerKm2: number;
     namedShare: number;
 }
 
@@ -58,6 +61,8 @@ export const networkStats = (network: StreetNetwork, options: StatsOptions = {})
     }
     const area = options.area ?? (network.edges.length > 0 ? bboxArea(networkBBox(network)) : 0);
     const areaKm2 = area / 1e6;
+    const lengthDensityKmPerKm2 = areaKm2 > 0 ? totalLength / 1000 / areaKm2 : 0;
+    const intersectionsPerKm2 = areaKm2 > 0 ? intersections / areaKm2 : 0;
     return {
         nodeCount: network.nodes.size,
         edgeCount: network.edges.length,
@@ -69,8 +74,11 @@ export const networkStats = (network: StreetNetwork, options: StatsOptions = {})
         meanEdgeLength: network.edges.length > 0 ? totalLength / network.edges.length : 0,
         circuity: straight > 0 ? curved / straight : 1,
         area,
-        density: areaKm2 > 0 ? totalLength / 1000 / areaKm2 : 0,
-        intersectionDensity: areaKm2 > 0 ? intersections / areaKm2 : 0,
+        areaKm2,
+        density: lengthDensityKmPerKm2,
+        lengthDensityKmPerKm2,
+        intersectionDensity: intersectionsPerKm2,
+        intersectionsPerKm2,
         namedShare: totalLength > 0 ? namedLength / totalLength : 0,
     };
 };

@@ -23,8 +23,8 @@ export const renderStats = (target: HTMLElement, stats: NetworkStats, types: Typ
         ['Mean degree', dec.format(stats.meanDegree)],
         ['Mean segment', `${int.format(stats.meanEdgeLength)} m`],
         ['Circuity', dec.format(stats.circuity)],
-        ['Density', `${km.format(stats.density)} km/km²`],
-        ['Intersections/km²', int.format(stats.intersectionDensity)],
+        ['Density', `${km.format(stats.lengthDensityKmPerKm2)} km/km²`],
+        ['Intersections/km²', int.format(stats.intersectionsPerKm2)],
         ['Named', pct.format(stats.namedShare)],
         ...types.slice(0, 4).map((type): [string, string] => [type.type ?? 'Untyped', `${km.format(type.length / 1000)} km · ${nameCount(type.names)}`]),
     ];

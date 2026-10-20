@@ -26,6 +26,17 @@ describe('networkStats', () => {
         expect(stats.circuity).toBeCloseTo(Math.SQRT2, 3);
         expect(stats.deadEnds).toBe(2);
         expect(stats.density).toBeCloseTo(stats.totalLength / 1000);
+        expect(stats.areaKm2).toBe(1);
+        expect(stats.lengthDensityKmPerKm2).toBe(stats.density);
+        expect(stats.intersectionsPerKm2).toBe(stats.intersectionDensity);
         expect(stats.namedShare).toBe(0);
+    });
+
+    it('reports length density in km/km² and intersections per km²', () => {
+        const network = grid(3);
+        const stats = networkStats(network, { area: 4e6 });
+        expect(stats.areaKm2).toBe(4);
+        expect(stats.lengthDensityKmPerKm2).toBeCloseTo(stats.totalLength / 1000 / 4);
+        expect(stats.intersectionsPerKm2).toBe(3);
     });
 });

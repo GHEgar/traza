@@ -28,7 +28,7 @@ npm install traza
 | `traza/osm` | Overpass query, fetch with area cap and `AbortSignal`, parser to network, water, parks and buildings | `fetch` |
 | `traza/sources` | GeoJSON and paged WFS (`CRS:84`) to network, joining vertices within a tolerance | `fetch` |
 | `traza/orientation` | Length-weighted bearing histogram, entropy and orientation order φ | nothing |
-| `traza/stats` | Length by class, intersections, dead ends, degree, circuity, density | nothing |
+| `traza/stats` | Length by class, intersections, dead ends, degree, circuity, street and intersection density | nothing |
 | `traza/names` | Street-name parsing (Mexican street types and abbreviations), categories from your rules, rankings | nothing |
 | `traza/poster` | Poster scene: projected layers, circle or rectangle frame, title block, attribution | nothing |
 | `traza/svg` | Poster and rose to SVG with your theme | nothing |
@@ -141,14 +141,16 @@ it; `scale: 'area'` (the default) makes petal area proportional to the share.
 import { networkStats } from 'traza/stats';
 import { streetTypes, topStreetNames } from 'traza/names';
 
-const { totalLength, intersections, deadEnds, circuity, density } = networkStats(network, { area: Math.PI * 1000 ** 2 });
+const { totalLength, intersections, deadEnds, circuity, lengthDensityKmPerKm2 } = networkStats(network, { area: Math.PI * 1000 ** 2 });
 const top = topStreetNames(network, { limit: 10, classes: ['primary', 'secondary', 'tertiary', 'residential'] });
 const types = streetTypes(network);
 ```
 
-Lengths are in meters and densities per km². Intersections are nodes of degree 3 or more and dead
-ends nodes of degree 1. Circuity is network length over straight-line distance between edge ends.
-Without `area` the network bounding box is used. Rankings group by normalized name, not by OSM way.
+Lengths are in meters and `area` in m² (`areaKm2` in km²). `lengthDensityKmPerKm2` is street length
+per area, in km/km², and `intersectionsPerKm2` is intersections per km². `density` and
+`intersectionDensity` are the same two values under their original names, kept for compatibility.
+Intersections are nodes of degree 3 or more and dead ends nodes of degree 1. Circuity is network
+length over straight-line distance between edge ends. Without `area` the network bounding box is used. Rankings group by normalized name, not by OSM way.
 
 ## Street names
 
