@@ -1,4 +1,4 @@
-import type { LonLat } from 'traza';
+import type { LonLat } from '@npmegar/traza';
 
 export interface Place {
     label: string;

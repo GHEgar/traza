@@ -16,31 +16,31 @@
         "skipLibCheck": true,
         "types": [],
         "paths": {
-            "traza": [
+            "@npmegar/traza": [
                 "./src/core/index.ts"
             ],
-            "traza/osm": [
+            "@npmegar/traza/osm": [
                 "./src/osm/index.ts"
             ],
-            "traza/sources": [
+            "@npmegar/traza/sources": [
                 "./src/sources/index.ts"
             ],
-            "traza/orientation": [
+            "@npmegar/traza/orientation": [
                 "./src/orientation/index.ts"
             ],
-            "traza/stats": [
+            "@npmegar/traza/stats": [
                 "./src/stats/index.ts"
             ],
-            "traza/names": [
+            "@npmegar/traza/names": [
                 "./src/names/index.ts"
             ],
-            "traza/poster": [
+            "@npmegar/traza/poster": [
                 "./src/poster/index.ts"
             ],
-            "traza/svg": [
+            "@npmegar/traza/svg": [
                 "./src/svg/index.ts"
             ],
-            "traza/ol": [
+            "@npmegar/traza/ol": [
                 "./src/ol/index.ts"
             ]
         },

@@ -1,5 +1,5 @@
-import type { NetworkCategories, NameCount, TypeCount } from 'traza/names';
-import type { NetworkStats } from 'traza/stats';
+import type { NetworkCategories, NameCount, TypeCount } from '@npmegar/traza/names';
+import type { NetworkStats } from '@npmegar/traza/stats';
 import { CATEGORY_LABELS } from './rules.js';
 
 const km = new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 });

@@ -7,6 +7,11 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [0.3.0] - 2026-10-20
 
+### Cambiado
+
+- El paquete se publica como `@npmegar/traza`: npm rechaza `traza` sin scope por parecerse a otro paquete.
+  Los subpaths siguen igual (`@npmegar/traza/osm`, `@npmegar/traza/stats`, …).
+
 ### Agregado
 
 - `networkStats` devuelve los campos con la unidad en el nombre: `lengthDensityKmPerKm2` (longitud de

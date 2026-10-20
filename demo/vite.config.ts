@@ -10,8 +10,8 @@ export default defineConfig({
     base: './',
     resolve: {
         alias: [
-            ...subpaths.map((name) => ({ find: new RegExp(`^traza/${name}$`), replacement: src(`${name}/index.ts`) })),
-            { find: /^traza$/, replacement: src('core/index.ts') },
+            ...subpaths.map((name) => ({ find: new RegExp(`^@npmegar/traza/${name}$`), replacement: src(`${name}/index.ts`) })),
+            { find: /^@npmegar\/traza$/, replacement: src('core/index.ts') },
         ],
     },
     build: {

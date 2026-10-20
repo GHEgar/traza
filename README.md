@@ -19,7 +19,7 @@ the theme you pass.
 ## Install
 
 ```bash
-npm install traza
+npm install @npmegar/traza
 ```
 
 | Entry | What it is | Needs |
@@ -37,11 +37,11 @@ npm install traza
 ## Quick start
 
 ```ts
-import { bboxAround } from 'traza';
-import { loadOsm } from 'traza/osm';
-import { orientation } from 'traza/orientation';
-import { createPosterScene } from 'traza/poster';
-import { posterToSvg, roseToSvg } from 'traza/svg';
+import { bboxAround } from '@npmegar/traza';
+import { loadOsm } from '@npmegar/traza/osm';
+import { orientation } from '@npmegar/traza/orientation';
+import { createPosterScene } from '@npmegar/traza/poster';
+import { posterToSvg, roseToSvg } from '@npmegar/traza/svg';
 
 const center: [number, number] = [-103.3475, 20.6767];
 const { network, extras } = await loadOsm({ bbox: bboxAround(center, 1000) }, { water: true, parks: true });
@@ -62,7 +62,7 @@ Any line layer works as long as each feature carries a name and something you ca
    than that are joined into one node.
 
 ```ts
-import { loadWfsNetwork } from 'traza/sources';
+import { loadWfsNetwork } from '@npmegar/traza/sources';
 
 const network = await loadWfsNetwork({
     url: 'https://example.org/geoserver/wfs',
@@ -138,8 +138,8 @@ it; `scale: 'area'` (the default) makes petal area proportional to the share.
 ## Statistics
 
 ```ts
-import { networkStats } from 'traza/stats';
-import { streetTypes, topStreetNames } from 'traza/names';
+import { networkStats } from '@npmegar/traza/stats';
+import { streetTypes, topStreetNames } from '@npmegar/traza/names';
 
 const { totalLength, intersections, deadEnds, circuity, lengthDensityKmPerKm2 } = networkStats(network, { area: Math.PI * 1000 ** 2 });
 const top = topStreetNames(network, { limit: 10, classes: ['primary', 'secondary', 'tertiary', 'residential'] });
@@ -155,7 +155,7 @@ length over straight-line distance between edge ends. Without `area` the network
 ## Street names
 
 ```ts
-import { categorizeNetwork } from 'traza/names';
+import { categorizeNetwork } from '@npmegar/traza/names';
 
 const { byEdge, categories } = categorizeNetwork(network, [
     { id: 'women', match: ['Leona Vicario', 'Josefa Ortiz de Domínguez'] },
@@ -184,7 +184,7 @@ points to a mirror and `signal` cancels the request.
 ## OpenLayers
 
 ```ts
-import { createStreetLayer } from 'traza/ol';
+import { createStreetLayer } from '@npmegar/traza/ol';
 
 const layer = createStreetLayer(network, { categorize: (name) => name?.startsWith('San ') ? 'saints' : null });
 ```

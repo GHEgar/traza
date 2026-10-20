@@ -1,4 +1,4 @@
-import type { NameRule } from 'traza/names';
+import type { NameRule } from '@npmegar/traza/names';
 
 export const RULES: NameRule[] = [
     {

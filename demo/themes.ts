@@ -1,4 +1,4 @@
-import type { PosterTheme, RoseTheme } from 'traza/svg';
+import type { PosterTheme, RoseTheme } from '@npmegar/traza/svg';
 
 export interface DemoTheme {
     label: string;

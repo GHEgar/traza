@@ -44,7 +44,7 @@ jobs:
       - name: npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm view "traza@${TAG#v}" version > /dev/null 2>&1 || npm publish --provenance --access public
+        run: npm view "@npmegar/traza@${TAG#v}" version > /dev/null 2>&1 || npm publish --provenance --access public
 
   github-packages:
     runs-on: ubuntu-latest

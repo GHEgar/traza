@@ -1,5 +1,5 @@
 {
-    "name": "traza",
+    "name": "@npmegar/traza",
     "version": "0.3.0",
     "description": "Headless street infographics: city posters, orientation roses, network stats and street-name maps.",
     "keywords": [
